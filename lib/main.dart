@@ -13,9 +13,6 @@ void main() {
     ChangeNotifierProvider(
       create: (_) => LoginViewModel(),
     ),
-    ChangeNotifierProvider(
-      create: (_) => HomeViewModel(),
-    ),
   ], child: const MyApp()));
 }
 

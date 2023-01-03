@@ -7,14 +7,15 @@ class HomeApi {
 
   HomeApi(this._dioClient);
 
-  Future<Response> getMatkul({
+  Future<Response> getMhs({
     required String nim,
     required String access_token,
   }) async {
+    Options options = Options(headers: {'Authorization': access_token});
     try {
       final Response res = await _dioClient.get(
         ConstantApi.matkulEndpoint,
-        queryParameters: {'nim': nim, 'token': access_token},
+        options: options,
       );
       return res;
     } on DioError catch (e) {
