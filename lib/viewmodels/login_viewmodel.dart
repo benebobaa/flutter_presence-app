@@ -11,44 +11,44 @@ class LoginViewModel with ChangeNotifier {
   final _sharedPref = getIt.get<SharedPref>();
   bool isLoading = false;
 
-  void submit(
-      {required String nim, required String password, required context}) async {
-    try {
-      print('login bro');
-      isLoading = true;
-      notifyListeners();
-      var response = await _authRepo.login(
-        nim: nim,
-        password: password,
-      );
-      isLoading = false;
-      notifyListeners();
-      print(response.statusCode);
-      print(response.data['message']!);
-      if (response.statusCode == 200) {
-        // await _sharedPref.saveToken(token: response.data['access_token']);
-        // final test = await Provider.of<HomeViewModel>(context, listen: false)
-        //     .getMatkulData(nim: nim);
+  // void submit(
+  //     {required String nim, required String password, required context}) async {
+  //   try {
+  //     print('login bro');
+  //     isLoading = true;
+  //     notifyListeners();
+  //     var response = await _authRepo.login(
+  //       nim: nim,
+  //       password: password,
+  //     );
+  //     isLoading = false;
+  //     notifyListeners();
+  //     print(response.statusCode);
+  //     print(response.data['message']!);
+  //     if (response.statusCode == 200) {
+  //       // await _sharedPref.saveToken(token: response.data['access_token']);
+  //       // final test = await Provider.of<HomeViewModel>(context, listen: false)
+  //       //     .getMatkulData(nim: nim);
 
-        // (test) async {
-        //   await Provider.of<HomeViewModel>(context, listen: false)
-        //       .getMatkulData(nim: nim);
-        // };
+  //       // (test) async {
+  //       //   await Provider.of<HomeViewModel>(context, listen: false)
+  //       //       .getMatkulData(nim: nim);
+  //       // };
 
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()));
-      }
-      // _sharedPref.saveToken(token: response.data['access_token']);
-      // if (response.data['success']!) {
-      //   Navigator.pushReplacement(context,
-      //       MaterialPageRoute(builder: (context) => const HomeScreen()));
-      // }
-    } catch (e) {
-      print(e);
-      isLoading = false;
-      notifyListeners();
-    }
-  }
+  //       Navigator.pushReplacement(context,
+  //           MaterialPageRoute(builder: (context) => const HomeScreen()));
+  //     }
+  //     // _sharedPref.saveToken(token: response.data['access_token']);
+  //     // if (response.data['success']!) {
+  //     //   Navigator.pushReplacement(context,
+  //     //       MaterialPageRoute(builder: (context) => const HomeScreen()));
+  //     // }
+  //   } catch (e) {
+  //     print(e);
+  //     isLoading = false;
+  //     notifyListeners();
+  //   }
+  // }
 }
 
 

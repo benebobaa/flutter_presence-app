@@ -16,17 +16,16 @@ class AuthApi {
       'username': nim,
       'keyword': password,
     });
-    
+
     try {
       final Response res = await _dioClient.post(
         ConstantApi.authEndpoint,
         data: data,
-        
       );
       return res;
     } on DioError catch (e) {
       // final String errorMsg = DioException.fromDioError(e).toString();
-      throw "nim or password incorrect";
+      throw "post login error";
     }
   }
 }

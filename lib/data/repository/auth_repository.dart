@@ -5,10 +5,10 @@ class AuthRepository {
   final AuthApi _authApi;
   AuthRepository(this._authApi);
 
-  Future<String> login({
+  Future<void> login({
     required String nim,
     required String password,
-    void Function(String msg)? onSuccess,
+    void Function(String msg, String token)? onSuccess,
     void Function(String msg)? onError,
   }) async {
     try {
@@ -16,14 +16,13 @@ class AuthRepository {
         nim: nim,
         password: password,
       );
-      print(res);
-      final data = json.decode(res.data['access_token']);
-      print('ini token ngab ${data}');
-      return data;
+      print(res.data);
+      final String token = res.data["access_token"];
+      print(token);
+      onSuccess!('Login Successfully', token);
     } catch (e) {
       print(e.toString());
       onError!(e.toString());
-      rethrow;
     }
   }
 }

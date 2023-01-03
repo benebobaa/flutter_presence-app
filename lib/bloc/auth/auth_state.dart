@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'auth_bloc.dart';
 
 @immutable
@@ -14,9 +15,12 @@ class AuthLoading extends AuthState {}
 
 class AuthSignOut extends AuthState {}
 
-class AuthLoaded extends AuthState {
+class AuthSignedIn extends AuthState {
+
   final MhsData user;
-  const AuthLoaded(this.user);
+  const AuthSignedIn(
+    this.user,
+  );
 
   @override
   List<Object?> get props => [user];

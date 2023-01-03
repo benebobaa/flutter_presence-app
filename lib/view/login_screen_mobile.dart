@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_presence/bloc/auth/auth_bloc.dart';
 import 'package:flutter_presence/utils/image_top_login.dart';
 import 'package:flutter_presence/utils/textfield_container.dart';
 import 'package:flutter_presence/viewmodels/login_viewmodel.dart';
@@ -18,8 +19,8 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
   final ValueNotifier<bool> _isVisible = ValueNotifier(true);
   // Form and Text Controller
   final _loginFormKey = GlobalKey<FormState>();
-  final _nim = TextEditingController();
-  final _password = TextEditingController();
+  final _nimController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -32,13 +33,13 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
     });
   }
 
-  void login(context) {
-    vm.submit(
-      context: context,
-      nim: _nim.text.trim(),
-      password: _password.text.trim(),
-    );
-  }
+  // void login(context) {
+  //   vm.submit(
+  //     context: context,
+  //     nim: _nim.text.trim(),
+  //     password: _password.text.trim(),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +56,16 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                   child: Column(
                 children: [
                   TextFieldContainer(
-                      controller: _nim, hintText: 'NIM', icon: Icons.person),
+                      controller: _nimController,
+                      hintText: 'NIM',
+                      icon: Icons.person),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: ValueListenableBuilder(
                       valueListenable: _isVisible,
                       builder: (_, value, child) {
                         return TextFieldContainer(
-                          controller: _password,
+                          controller: _passwordController,
                           hintText: 'Password',
                           icon: Icons.lock,
                           valueListenablePass: _isVisible,
@@ -112,7 +115,11 @@ class _MobileLoginScreenState extends State<MobileLoginScreen> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-                            onPressed: () => login(context),
+                            onPressed: () {
+                              context.read<AuthBloc>().add(SignIn(
+                                  nim: _nimController.text,
+                                  password: _passwordController.text));
+                            },
                             child: const Text(
                               'Login',
                             ),
